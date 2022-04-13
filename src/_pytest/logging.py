@@ -443,7 +443,7 @@ class LogCaptureFixture:
         self.handler.reset()
 
     def set_level(self, level: Union[int, str], logger: Optional[str] = None) -> None:
-        """Set the level of a logger for the duration of a test.
+        """Set threshold level for this `logger` to `level`.
 
         .. versionchanged:: 3.4
             The levels of the loggers changed by this function will be
