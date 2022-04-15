@@ -138,6 +138,8 @@ def warns(
           ...
         Failed: DID NOT WARN. No warnings of type ...UserWarning... were emitted...
 
+    .. note::
+       pytest.warns by design also captures DeprecationWarning
     """
     __tracebackhide__ = True
     if not args:
