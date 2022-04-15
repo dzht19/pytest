@@ -265,11 +265,14 @@ class ApproxMapping(ApproxBase):
                 max_abs_diff = max(
                     max_abs_diff, abs(approx_value.expected - other_value)
                 )
+                try:
                 max_rel_diff = max(
                     max_rel_diff,
                     abs((approx_value.expected - other_value) / approx_value.expected),
                 )
                 different_ids.append(approx_key)
+            except: ZeroDivisionError:
+                pass
 
         message_data = [
             (str(key), str(other_side[key]), str(approx_side_as_map[key]))
@@ -397,6 +400,7 @@ class ApproxScalar(ApproxBase):
         # handle complex numbers, e.g. (inf + 1j).
         if (not isinstance(self.expected, (Complex, Decimal))) or math.isinf(
             abs(self.expected)  # type: ignore[arg-type]
+            or isinstance(self.expected, bool)
         ):
             return str(self.expected)
 
@@ -427,7 +431,8 @@ class ApproxScalar(ApproxBase):
         # Short-circuit exact equality.
         if actual == self.expected:
             return True
-
+        elif isinstance(self.expected, bool) and not isinstance(actual, bool):
+            return False
         # If either type is non-numeric, fall back to strict equality.
         # NB: we need Complex, rather than just Number, to ensure that __abs__,
         # __sub__, and __float__ are defined.
