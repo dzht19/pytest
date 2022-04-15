@@ -324,6 +324,11 @@ class TestApprox:
 
         assert err.match(r"approx\(\) is not supported in a boolean context")
 
+    def test_bool(self):
+        assert True == approx(True)
+        assert False == approx(False)
+
+
     def test_operator_overloading(self):
         assert 1 == approx(1, rel=1e-6, abs=1e-12)
         assert not (1 != approx(1, rel=1e-6, abs=1e-12))
