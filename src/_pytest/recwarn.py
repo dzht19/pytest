@@ -139,9 +139,9 @@ def warns(
         Failed: DID NOT WARN. No warnings of type ...UserWarning... were emitted...
 
     .. note::
-       Pytest be dedault will capture all the Deprecation Warnings as it avoides
+       Pytest by dedault will capture all the Deprecation Warnings as it avoides
        code breakages and maintains code actuallity.
-       Use warning filter to ignore Deprecation Warnings. 
+       Use warning filter to ignore Deprecation Warnings.
     """
     __tracebackhide__ = True
     if not args:
